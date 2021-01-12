@@ -2,11 +2,11 @@
 if [ ! -d /home/juav/ardupilot ]; then
     ln -s /home/juav/ardupilot-original /home/juav/ardupilot;
 fi;
-#sed -i "s/memset/\/\/memset/g" /home/juav/ardupilot/libraries/AP_Mount/SoloGimbalEKF.cpp
 . ~/.profile
 cd JUAV-ardupilot
 mvn install -Dhttps.protocols=TLSv1.2
 cd juav-native/juav-native-ardupilot/jni/
+mkdir -p lib
 make sitl
 cd ../../../juav-hal/juav-hal-sitl/
 sudo ln -s /home/juav/JUAV-ardupilot/juav-native/juav-native-ardupilot/jni/lib/libArduCopterSitl.so /usr/lib/

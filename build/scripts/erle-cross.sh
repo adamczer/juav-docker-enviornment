@@ -6,6 +6,7 @@ fi;
 cd JUAV-ardupilot
 mvn install -Dhttps.protocols=TLSv1.2
 cd juav-native/juav-native-ardupilot/jni/
+mkdir -p lib
 make erle
 cd ../../../juav-hal/juav-hal-erle-copter/
 

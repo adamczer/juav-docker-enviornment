@@ -1,5 +1,6 @@
 #!/bin/bash
 mkdir -p m2
+mkdir -p output
 if [ ! -d ardupilot ]; then
   mkdir ardupilot
   docker run --platform linux/386 -it -v $PWD/ardupilot:/home/juav/ardupilot --entrypoint /bin/bash juav-docker -c 'cp -r /home/juav/ardupilot-original/. /home/juav/ardupilot/'

@@ -7,6 +7,7 @@ fi;
 cd ~/JUAV-ardupilot
 mvn install -Dhttps.protocols=TLSv1.2
 cd juav-native/juav-native-ardupilot/jni/
+mkdir -p lib
 make sitl
 cd ../../../juav-hal/juav-hal-sitl/
 sudo ln -s /home/juav/JUAV-ardupilot/juav-native/juav-native-ardupilot/jni/lib/libArduCopterSitl.so /usr/lib/
@@ -16,6 +17,7 @@ sudo ldconfig
 
 xterm -e sim_vehicle.py -v ArduCopter --console --map &
 cd juav-fiji
+cp /usr/lib/*Sitl* .
 set -m
 sudo -E ./JuavFiji fiji &
 fg
