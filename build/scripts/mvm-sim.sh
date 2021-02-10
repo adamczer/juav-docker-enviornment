@@ -14,10 +14,14 @@ sudo ldconfig
 ./build-juav-fiji-mvm.sh
 cd juav-fiji-mvm
 cp /usr/lib/lib*Sitl*.so .
+#xterm -e /tmp/script.sh &
 xterm -e sim_vehicle.py -v ArduCopter --console --map &
+date
 set -m
+#sudo -E taskset -c 0 ./mvm &
 sudo -E ./mvm &
 fg
+date
 thisRun=`date '+%Y-%m-%d-%H-%M-%S'`
-mkdir -p /home/juav/output/${thisRun}-java
-mv *.log /home/juav/output/${thisRun}-java/
+mkdir -p /home/juav/output/${thisRun}-mvm
+mv *.log /home/juav/output/${thisRun}-mvm/
