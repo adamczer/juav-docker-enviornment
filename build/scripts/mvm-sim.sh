@@ -19,9 +19,9 @@ xterm -e sim_vehicle.py -v ArduCopter --console --map &
 date
 set -m
 #sudo -E taskset -c 0 ./mvm &
-sudo -E ./mvm &
+sudo -E ./mvm-$1 &
 fg
 date
 thisRun=`date '+%Y-%m-%d-%H-%M-%S'`
-mkdir -p /home/juav/output/${thisRun}-mvm
-mv *.log /home/juav/output/${thisRun}-mvm/
+mkdir -p /home/juav/output/${thisRun}-mvm-$1
+mv *.log /home/juav/output/${thisRun}-mvm-$1/

@@ -5,13 +5,17 @@ ENV JUAV_SRC=/home/juav/JUAV-ardupilot
 ENV ARDU_SRC=/home/juav/ardupilot
 ENV FIJI_HOME=/home/juav/Fiji-VM-JUAV
 ENV JAVA_HOME=/home/juav/jdk1.7.0_80/
-ENV PATH=$JAVA_HOME/bin:$PATH:$HOME/bin
+ENV ARM_GCC=/home/juav/gcc-linaro
+ENV PATH=$ARM_GCC/bin:$JAVA_HOME/bin:$PATH:$HOME/bin:$ARDU_SRC/Tools/scripts
 RUN useradd -ms /bin/bash juav
-RUN apt-get update && apt-get install -y sudo git gitk git-gui maven lsb-release software-properties-common ruby time vim
+RUN apt-get update && apt-get install -y wget sudo git gitk git-gui maven lsb-release software-properties-common ruby time vim
 RUN adduser juav sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER juav
 WORKDIR /home/juav
+RUN wget https://releases.linaro.org/components/toolchain/binaries/4.9-2017.01/arm-linux-gnueabihf/gcc-linaro-4.9.4-2017.01-i686_arm-linux-gnueabihf.tar.xz && \
+tar xf gcc-linaro-4.9.4-2017.01-i686_arm-linux-gnueabihf.tar.xz && mv gcc-linaro-4.9.4-2017.01-i686_arm-linux-gnueabihf gcc-linaro && \ 
+rm gcc-linaro-4.9.4-2017.01-i686_arm-linux-gnueabihf.tar.xz
 RUN git clone https://github.com/ArduPilot/ardupilot.git && \
 cd ardupilot && \
 git checkout 22c9081c8325ec8d980906fe7b1d23f29080a216 && \
