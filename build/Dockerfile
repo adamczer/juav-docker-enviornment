@@ -8,7 +8,7 @@ ENV JAVA_HOME=/home/juav/jdk1.7.0_80/
 ENV ARM_GCC=/home/juav/gcc-linaro
 ENV PATH=$ARM_GCC/bin:$JAVA_HOME/bin:$PATH:$HOME/bin:$ARDU_SRC/Tools/scripts
 RUN useradd -ms /bin/bash juav
-RUN apt-get update && apt-get install -y wget sudo git gitk git-gui maven lsb-release software-properties-common ruby time vim
+RUN apt-get update && apt-get install -y wget sudo git gitk git-gui maven lsb-release software-properties-common ruby time vim gdb
 RUN adduser juav sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER juav

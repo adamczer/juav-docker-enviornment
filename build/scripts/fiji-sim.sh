@@ -18,9 +18,13 @@ sudo ldconfig
 xterm -e sim_vehicle.py -v ArduCopter --console --map &
 cd juav-fiji
 cp /usr/lib/*Sitl* .
+date
 set -m
-sudo -E ./JuavFiji fiji &
+#sudo -E ./JuavFiji fiji &
+#sudo -E taskset -c 0-3 ./JuavFiji fiji $1 &
+sudo -E taskset -c 0 ./JuavFiji fiji $1 &
 fg
+date
 thisRun=`date '+%Y-%m-%d-%H-%M-%S'`
-mkdir -p /home/juav/output/${thisRun}-fiji
-mv *.log /home/juav/output/${thisRun}-fiji/
+mkdir -p /home/juav/output/${thisRun}-fiji-$1
+mv *.log /home/juav/output/${thisRun}-fiji-$1/
