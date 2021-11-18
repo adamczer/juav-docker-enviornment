@@ -31,7 +31,6 @@ RUN cp -r /home/juav/Fiji-VM-JUAV-orig /home/juav/Fiji-VM-JUAV
 COPY files /home/juav/files
 
 RUN tar xf files/jdk-7u80-linux-i586.tar.gz
-
 RUN cd Fiji-VM-JUAV && \
 sed -i '1739i // fall through\n' runtimec/src/fivmr_cmrgc.c && \
 sed -i "s/adamczer\/mvm-yin\/fivm/juav\/Fiji-VM-JUAV/g" scj/oSCJ/scj/ri/config.status && \
@@ -42,4 +41,11 @@ make && \
 bin/add-target --cc /usr/bin/arm-linux-gnueabihf-gcc --posix --host arm-linux-gnueabihf --ptr-size 32 && \
 make
 
+RUN sudo apt-get install -y libpng-dev
+RUN cp -r files/arm-cross-dependencies/*   /home/juav/gcc-linaro/arm-linux-gnueabihf/
 COPY scripts /home/juav/scripts
+
+RUN cd /tmp && git clone --branch 2.4 https://github.com/opencv/opencv.git && \
+cd opencv/ && mkdir build && cd build/ && cmake ../ && cmake --build . -- -j $(nproc) && sudo make install
+
+#RUN which arm-linux-gnueabihf-gcc

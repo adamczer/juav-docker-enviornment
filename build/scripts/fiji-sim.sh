@@ -6,7 +6,10 @@ fi;
 . ~/.profile
 cd ~/JUAV-ardupilot
 mvn install -Dhttps.protocols=TLSv1.2
-cd juav-native/juav-native-ardupilot/jni/
+cd native-util/jni
+make sitl
+sudo ln -s /home/juav/JUAV-ardupilot/native-util/jni/lib/libNativeUtil.so /usr/lib/
+cd ../../juav-native/juav-native-ardupilot/jni/
 mkdir -p lib
 make sitl
 cd ../../../juav-hal/juav-hal-sitl/
